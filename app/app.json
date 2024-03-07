@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "app",
+    "name": "yekhazar-test",
     "slug": "app",
-    "version": "1.0.0",
+    "scheme":"yekhazar-test",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,10 +22,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.devanandan5.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "17fc9f50-c3fa-4813-99a3-0159f7230589"
+      }
     }
+    
   }
 }
