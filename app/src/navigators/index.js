@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import SplashScreen from "../screens/SplashScreen";
+import { SplashScreen, WelcomeScreen } from "../screens";
 
 
 
@@ -17,6 +17,8 @@ const Navigators = () => {
         }}
       >
         <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Welcome" component={WelcomeScreen
+        } />
       </Stack.Navigator>
     </NavigationContainer>
   );

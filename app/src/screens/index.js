@@ -1,3 +1,3 @@
 import SplashScreen from "./SplashScreen"
-
-export {SplashScreen}
+import WelcomeScreen from "./WelcomeScreen"
+export {SplashScreen,WelcomeScreen}
