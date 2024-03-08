@@ -77,7 +77,7 @@ const WelcomeScreen = ({ navigation }) => {
       <Separator height={Display.setHeight(8)} />
       {welcomeListIndex === 2 ? (
         <TouchableOpacity
-          
+          onPress={() => navigation.navigate("Signin")}
           style={styles.gettingStartedButton}
         >
           <Text style={styles.gettingStartedButtonText}>Get Started</Text>
