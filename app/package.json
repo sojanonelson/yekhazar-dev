@@ -11,11 +11,12 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-community/netinfo": "11.1.0",
     "@react-navigation/native": "^5.9.8",
     "@react-navigation/stack": "^5.14.9",
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
-    "expo": "~50.0.8",
+    "expo": "~50.0.11",
     "expo-constants": "~15.4.5",
     "expo-linking": "~6.2.2",
     "expo-status-bar": "~1.11.1",
@@ -26,13 +27,14 @@
     "react-native-safe-area-context": "4.8.2",
     "react-native-screens": "~3.29.0",
     "react-redux": "^9.1.0",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "expo-build-properties": "~0.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
   "projectConfig": {
-    "backendApiBaseUrl": "http://192.46.210.111:3000"
+    "backendApiBaseUrl": "https://complete-ecom-yek-wuj1.onrender.com"
   },
   "private": true
 }
