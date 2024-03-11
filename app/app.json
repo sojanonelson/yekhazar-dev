@@ -2,8 +2,8 @@
   "expo": {
     "name": "yekhazar-test",
     "slug": "app",
-    "scheme":"yekhazar-test",
-    "version": "1.0.4",
+    "scheme": "yekhazar-test",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -32,7 +30,16 @@
       "eas": {
         "projectId": "17fc9f50-c3fa-4813-99a3-0159f7230589"
       }
-    }
-    
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartexttracffic": true
+          }
+        }
+      ]
+    ]
   }
 }

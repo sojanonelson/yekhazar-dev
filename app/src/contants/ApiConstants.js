@@ -8,7 +8,7 @@ const COUNTRY_FLAG = {
 };
 
 const BACKEND_API = {
-  BASE_API_URL: `${BACKEND_BASE_URL}/api`,
+  BASE_API_URL: `https://complete-ecom-yek-wuj1.onrender.com/api`,
   REGISTER: "/auth/register",
   LOGIN: "/auth/login",
   FORGOT_PASSWORD: "/auth/forgot",
