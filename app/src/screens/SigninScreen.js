@@ -6,14 +6,12 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
-import NetInfo from '@react-native-community/netinfo';
-
-
+import NetInfo from "@react-native-community/netinfo";
 
 import React, { useEffect, useState } from "react";
-import { Separator, ToggleButton } from "../components";
+import { Separator } from "../components";
 import Ioncion from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors, Images } from "../contants";
@@ -31,35 +29,33 @@ import BrandService from "../services/BrandService";
 import { getBrandsSuccess } from "../redux/slices/BrandSlice";
 
 const SigninScreen = ({ navigation }) => {
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      handleConnectivityChange(state.isConnected);
+    });
 
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
-useEffect(() => {
-  const unsubscribe = NetInfo.addEventListener((state) => {
-    handleConnectivityChange(state.isConnected);
-  });
-
-  return () => {
-    unsubscribe();
-  };
-}, []);
-
-const handleConnectivityChange = (isConnected) => {
-  if (!isConnected) {
-    Alert.alert(
-      'No Internet Connection',
-      'Please turn on mobile data or connect to a network.',
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            Alert.alert('OK Pressed');
+  const handleConnectivityChange = (isConnected) => {
+    if (!isConnected) {
+      Alert.alert(
+        "No Internet Connection",
+        "Please turn on mobile data or connect to a network.",
+        [
+          {
+            text: "OK",
+            onPress: () => {
+              Alert.alert("OK Pressed");
+            },
           },
-        },
-      ],
-      { cancelable: false }
-    );
-  }
-};
+        ],
+        { cancelable: false }
+      );
+    }
+  };
 
   const dispatch = useDispatch();
   const [isPasswordShow, setPasswordShow] = useState(false);
@@ -69,7 +65,7 @@ const handleConnectivityChange = (isConnected) => {
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    Alert.alert("Login Started");
+   
     setIsLoading(true);
     setError(false);
 
@@ -80,16 +76,8 @@ const handleConnectivityChange = (isConnected) => {
       const allBrands = await BrandService.getAllBrands();
       dispatch(getBrandsSuccess(allBrands));
 
-      const singleSlug = await CategoryService.getSingleCategory();
-
       const response = await ProductService.getAllProduct();
       dispatch(fetchProductsSuccess(response));
-
-      console.log("AllCategory:", allCategories);
-      console.log("AllBrands:", allBrands);
-      console.log("SingleSlug:", singleSlug);
-
-
 
       let user = {
         email: "business.deeze@gmail.com",
@@ -108,8 +96,8 @@ const handleConnectivityChange = (isConnected) => {
           console.log("Email or Password is incorrect ~[Login]~");
         } else if (response?.success) {
           setError(false);
-          Alert.alert("Login Successful");
-          
+          navigation.navigate("Home");
+         
         }
       });
     } catch (error) {
@@ -178,7 +166,7 @@ const handleConnectivityChange = (isConnected) => {
             name={isPasswordShow ? "eye" : "eye-off"}
             size={22}
             color={Colors.DEFAULT_GREY}
-            style={{ marginTop: 14, marginLeft: 190 }}
+            style={{ marginTop: 15, marginLeft: 220 }}
             onPress={() => setPasswordShow(!isPasswordShow)}
           />
         </View>
@@ -189,7 +177,7 @@ const handleConnectivityChange = (isConnected) => {
 
       <View style={styles.forgetPasswordConatiner}>
         <View style={styles.toggleContainer}>
-          <Text style={styles.rememberMeText}>Remember me</Text>
+          <Text style={styles.rememberMeText}> </Text>
         </View>
         <Text
           style={styles.forgetPasswordText}
@@ -205,6 +193,12 @@ const handleConnectivityChange = (isConnected) => {
         ) : (
           <Text style={styles.signinButtonText}>Sign In</Text>
         )}
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.signinButton} onPress={() => navigation.openDrawer()}>
+        
+          <Text style={styles.signinButtonText}>Open Drawer</Text>
+    
       </TouchableOpacity>
 
       <View style={styles.signupConatiner}>

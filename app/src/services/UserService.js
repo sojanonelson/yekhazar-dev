@@ -51,7 +51,7 @@ const resetPassword = async (oldpassword, newpassword, token) => {
   try {
     const response = await UserReq.post(
       ApiConstants.BACKEND_API.RESET_PASSWORD,
-      { password:oldpassword , confirmPassword:newpassword },
+      { password: oldpassword, confirmPassword: newpassword },
       { headers: { Authorization: token } }
     );
     return response.data;
@@ -104,6 +104,51 @@ const updateProfile = async (data, token) => {
   } catch (error) {}
 };
 
+const addReview = async (
+  productid,
+  title,
+  review,
+  rating,
+  isRecommended,
+  token
+) => {
+  console.log("Data for adding address is ", productid,title,review,rating,isRecommended,token)
+  try {
+    const response = await UserReq.post(
+      ApiConstants.BACKEND_API.ADD_REVIEW,
+      {
+        product: productid,
+        title: title,
+        review: review,
+        rating: rating,
+        isRecommended: "1",
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    ).then((res) => res.data);
+    console.log("Add Review service:", response);
+
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getReview = async (slug) => {
+  try {
+    const response = await UserReq.get(
+      ApiConstants.BACKEND_API.GET_REVIEW + slug
+    ).then((res) => res.data);
+    console.log("Get Review service:", response);
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export default {
   getAddress,
   addAddress,
@@ -112,4 +157,6 @@ export default {
   deleteAddress,
   updateProfile,
   getProfile,
+  addReview,
+  getReview,
 };

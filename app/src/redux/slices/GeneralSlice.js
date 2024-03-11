@@ -5,6 +5,7 @@ const initialState = {
   token: "",
   isFirstTimeUse: true,
   selectedProduct: {},
+  selectedProductReview: {},
   selectedAddress: {},
   showcaseProduct: {},
   showcaseProductName: "",
@@ -12,7 +13,6 @@ const initialState = {
   orderId: "",
   paymentKey: "",
   paymentAmount: "",
-  userProfile: {},
 };
 
 const generalSlice = createSlice({
@@ -49,12 +49,8 @@ const generalSlice = createSlice({
     setSelectedAddress: (state, action) => {
       state.selectedAddress = action.payload;
     },
-    setUserProfile: (state, action) => {
-      state.userProfile = action.payload;
-    },
-    clearShowcaseData: (state) => {
-      state.showcaseProduct = initialState.showcaseProduct;
-      state.showcaseProductName = initialState.showcaseProductName;
+    setSelectedProductReview: (state, action) => {
+      state.selectedProductReview = action.payload;
     },
   },
 });
@@ -70,8 +66,7 @@ export const {
   setOrderId,
   setPaymentAmount,
   setSelectedAddress,
-  setUserProfile,
-  clearShowcaseData
+  setSelectedProductReview
 } = generalSlice.actions;
 
 export default generalSlice.reducer;
