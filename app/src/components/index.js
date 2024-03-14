@@ -7,4 +7,5 @@ import MyCarousel from "./MyCarousel";
 import ProductItem from "./ProductItem";
 import ProductList from "./ProductList";
 import ProductGrid from "./ProductGrid";
-export {ProductItem,ProductList,ProductGrid, WelcomeCard, Separator,DrawerScreen,TestDrawer,Badge,MyCarousel };
+import SettingsHeader from "./SettingsHeader";
+export {ProductItem,ProductList,ProductGrid,SettingsHeader, WelcomeCard, Separator,DrawerScreen,TestDrawer,Badge,MyCarousel };

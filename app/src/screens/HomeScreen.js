@@ -64,20 +64,20 @@ const HomeScreen = () => {
   const token = useSelector((state) => state.user.user.token);
   const [quantity, setQuantity] = useState(1);
   //CONSOLES
-  console.log("🪐TOKEN: ", token);
-  console.log("🪐User Data: ", userData);
-  console.log("🪐Brand Data: ", brandData);
-  console.log("🪐All Product: ", productsData);
-  console.log("🪐Categories: ", categoryData);
+  // console.log("🪐TOKEN: ", token);
+  // console.log("🪐User Data: ", userData);
+  // console.log("🪐Brand Data: ", brandData);
+  // console.log("🪐All Product: ", productsData);
+  // console.log("🪐Categories: ", categoryData);
 
-  console.log("🪐FirstCategoryName: ", firstCategoryName);
-  console.log("🪐FirstProduct: ", firstCategoryProducts);
+  // console.log("🪐FirstCategoryName: ", firstCategoryName);
+  // console.log("🪐FirstProduct: ", firstCategoryProducts);
 
-  console.log("🪐SecondCategoryname: ", secondCategoryName);
-  console.log("🪐SecondCategoryName: ", secondCategoryProducts);
+  // console.log("🪐SecondCategoryname: ", secondCategoryName);
+  // console.log("🪐SecondCategoryName: ", secondCategoryProducts);
 
-  console.log("🪐ThirdCategoryName: ", thirdCategoryName);
-  console.log("🪐ThirdCategoryProducts: ", thirdCategoryProducts);
+  // console.log("🪐ThirdCategoryName: ", thirdCategoryName);
+  // console.log("🪐ThirdCategoryProducts: ", thirdCategoryProducts);
 
   useEffect(() => {
     if (categoryData.length > 0) {
@@ -129,7 +129,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <Text style={styles.title}>YEKHAZAR</Text>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
           <Ionicon name="cart" size={33} />
           <Badge count={cartCount} />
         </TouchableOpacity>

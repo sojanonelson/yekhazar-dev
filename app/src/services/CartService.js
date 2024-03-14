@@ -23,7 +23,7 @@ const getCartId = async ( products, token ) => {
       );
 
     console.log("Tokenn:", token)
-    console.log("REQUEST:", response)
+   
     
     if (response.status >= 200 && response.status < 300) {
       
