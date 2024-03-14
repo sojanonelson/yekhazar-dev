@@ -162,8 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: Colors.DEAFULT_BG,
-    marginVertical: 10,
-    fontFamily: "poppins-regular",
+    marginVertical: 10
   },
   drawerContent: {
     flex: 1,
@@ -209,7 +208,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
     marginLeft: 5,
-    fontFamily: "poppins-medium",
+
   },
   logoutContainer: {
     marginTop: "auto",
@@ -224,7 +223,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.DEAFULT_WHITE,
 
-    fontFamily: "poppins-medium",
   },
   profileEmail: {
     color: Colors.DEAFULT_WHITE,

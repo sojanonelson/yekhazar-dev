@@ -16,7 +16,7 @@ import Ioncion from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
 import { Colors, Images } from "../contants";
 import { Display } from "../utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AuthenicationService,
   ProductService,
@@ -29,6 +29,8 @@ import BrandService from "../services/BrandService";
 import { getBrandsSuccess } from "../redux/slices/BrandSlice";
 
 const SigninScreen = ({ navigation }) => {
+
+  const username = useSelector((state) => state.user.user?.user);
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
       handleConnectivityChange(state.isConnected);
@@ -96,7 +98,7 @@ const SigninScreen = ({ navigation }) => {
           console.log("Email or Password is incorrect ~[Login]~");
         } else if (response?.success) {
           setError(false);
-          navigation.navigate("Home");
+          navigation.navigate("Main");
          
         }
       });
@@ -174,6 +176,11 @@ const SigninScreen = ({ navigation }) => {
       {error ? (
         <Text style={styles.error}>Incorrect email or password</Text>
       ) : null}
+
+     
+     
+
+
 
       <View style={styles.forgetPasswordConatiner}>
         <View style={styles.toggleContainer}>

@@ -31,13 +31,13 @@ export const cartSlice = createSlice({
       state.items = [];
       state.count = 0; 
     },
-    setCardId: (state, action) => {
+    setCartId: (state, action) => {
       state.cartID = action.payload;
     },
     
   },
 });
 
-export const { addItem, incrementCount, decrementCount, removeItem, clearCart,setCardId } = cartSlice.actions;
+export const { addItem, incrementCount, decrementCount, removeItem, clearCart,setCartId } = cartSlice.actions;
 
 export default cartSlice.reducer;
