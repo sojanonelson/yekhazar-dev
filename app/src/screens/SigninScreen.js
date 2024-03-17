@@ -27,10 +27,11 @@ import { loginSuccess } from "../redux/slices/userSlice";
 import { getCategorySuccess } from "../redux/slices/categorySlice";
 import BrandService from "../services/BrandService";
 import { getBrandsSuccess } from "../redux/slices/BrandSlice";
+import { storeUserData} from "../services/StorageService"
 
 const SigninScreen = ({ navigation }) => {
 
-  const username = useSelector((state) => state.user.user?.user);
+
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
       handleConnectivityChange(state.isConnected);
@@ -98,6 +99,7 @@ const SigninScreen = ({ navigation }) => {
           console.log("Email or Password is incorrect ~[Login]~");
         } else if (response?.success) {
           setError(false);
+          storeUserData(response)
           navigation.navigate("Main");
          
         }
@@ -202,11 +204,7 @@ const SigninScreen = ({ navigation }) => {
         )}
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.signinButton} onPress={() => navigation.openDrawer()}>
-        
-          <Text style={styles.signinButtonText}>Open Drawer</Text>
-    
-      </TouchableOpacity>
+
 
       <View style={styles.signupConatiner}>
         <Text style={styles.accountText}>Dont have an account?</Text>

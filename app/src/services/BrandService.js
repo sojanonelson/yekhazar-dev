@@ -23,7 +23,7 @@ const getSingleBrand = async () => {
     const response = await BrandReq.get(ApiConstants.BACKEND_API.BRAND_LIST);
     const data = response?.data?.barnds?.[1].name;
     
-    console.log('🔺Single Brand', data);
+    console.log('🔺Single Brand');
 
     return data;
   } catch (error) {

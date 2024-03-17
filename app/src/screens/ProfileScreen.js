@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,26 +9,27 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import Ionicon from "@expo/vector-icons/Ionicons";
+
 import { Colors, Images } from "../contants";
 import { Separator, SettingsHeader } from "../components";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { Display } from "../utils";
+import { UserService } from "../services";
+import { localUserData } from "../services/StorageService";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const [isLoading, setIsLoading] = useState(false);
 
- 
-  const [updateDetails, setUpdateDetails] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber:"",
-    password:""
-  })
+  const [isLoading, setIsLoading] = useState(false);
+  const userData = useSelector((state) => state.user.user);
+  const [userDetails, setUserDetails] = useState(userData);
+
+  useEffect(() => {
+    setUserDetails(userData);
+  }, [userData]);
+
+
   const updateUserDetails = (key, value) => {
     setUserDetails((prevDetails) => ({
       ...prevDetails,
@@ -36,9 +37,24 @@ const ProfileScreen = () => {
     }));
   };
 
+  const update = async ()=>{
 
-  const userData = useSelector((state) => state.user.user.user);
-  console.log("UserData frm  profile", userData);
+    try{
+      console.log("Updating...")
+
+      const {token}= await localUserData()
+      console.log("Token for profile", token)
+      response = await UserService.updateProfile( userDetails, token )
+      console.log("Update response",response)
+
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+
+
+  console.log("UserData from  profile", userDetails);
   return (
     <View style={styles.container}>
       <StatusBar
@@ -47,8 +63,8 @@ const ProfileScreen = () => {
         translucent
       />
       <Separator height={StatusBar.currentHeight} />
-      
-      <SettingsHeader title={"Profile"}/>
+
+      <SettingsHeader title={"Profile"} />
 
       <ScrollView
         contentContainerStyle={styles.scrollViewContent}
@@ -62,11 +78,10 @@ const ProfileScreen = () => {
             <Text style={styles.infoLabel}>First Name:</Text>
             <View style={styles.inputContainer}>
               <TextInput
-                value={userData.firstName}
+                value={userDetails.firstName}
                 placeholderTextColor={Colors.DEFAULT_GREY}
                 selectionColor={Colors.DEFAULT_GREY}
                 style={styles.inputText}
-                
                 onChangeText={(text) => updateUserDetails("firstName", text)}
                 editable={true}
               />
@@ -77,11 +92,10 @@ const ProfileScreen = () => {
             <Text style={styles.infoLabel}>Last Name:</Text>
             <View style={styles.inputContainer}>
               <TextInput
-                value={userData.lastName}
+                value={userDetails.lastName}
                 placeholderTextColor={Colors.DEFAULT_GREY}
                 selectionColor={Colors.DEFAULT_GREY}
                 style={styles.inputText}
-                
                 onChangeText={(text) => updateUserDetails("lastName", text)}
                 editable={true}
               />
@@ -91,41 +105,39 @@ const ProfileScreen = () => {
             <Text style={styles.infoLabel}>Email:</Text>
             <View style={styles.inputContainer}>
               <TextInput
-                value={userData.email}
+                value={userDetails.email}
                 placeholderTextColor={Colors.DEFAULT_GREY}
                 selectionColor={Colors.DEFAULT_GREY}
                 style={styles.inputText}
-                onChangeText={(text) => updateUserDetails("email", text)}
                 editable={true}
+                onChangeText={(text) => updateUserDetails("email", text)}
               />
             </View>
           </View>
-          
 
           <View style={styles.infoItem}>
             <Text style={styles.infoLabel}>Phone Number:</Text>
             <View style={styles.inputContainer}>
               <TextInput
-                value={userData.phoneNumber}
+                value={userDetails.phoneNumber}
                 placeholderTextColor={Colors.DEFAULT_GREY}
                 selectionColor={Colors.DEFAULT_GREY}
                 style={styles.inputText}
                 keyboardType="number-pad"
-                onChangeText={(text) => setPhoneNumber(text)}
+                onChangeText={(text) => updateUserDetails("phoneNumber", text)}
                 editable={true}
               />
             </View>
           </View>
         </View>
-        </ScrollView>
-        <TouchableOpacity style={styles.signinButton}>
-          {isLoading ? (
-            <Image source={Images.LOAD} />
-          ) : (
-            <Text style={styles.signinButtonText}>Update</Text>
-          )}
-        </TouchableOpacity>
-     
+      </ScrollView>
+      <TouchableOpacity style={styles.signinButton} onPress={()=> update()}>
+        {isLoading ? (
+          <Image source={Images.LOAD} />
+        ) : (
+          <Text style={styles.signinButtonText}>Update</Text>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };
@@ -142,7 +154,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.DEAFULT_BG,
     padding: 20,
-    paddingTop:20,
+    paddingTop: 20,
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
@@ -202,7 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.DEAFULT_BG,
     borderRadius: 8,
     marginHorizontal: 20,
-    marginVertical:20,
+    marginVertical: 20,
     height: Display.setHeight(6),
     justifyContent: "center",
     alignItems: "center",
@@ -212,7 +224,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 18 * 1.4,
     color: Colors.DEAFULT_WHITE,
- 
   },
 });
 

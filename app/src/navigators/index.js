@@ -18,7 +18,9 @@ import {
   AddAddressScreen,
   UpdateAddressScreen,
   ProfileScreen,
-  CartScreen
+  CartScreen,
+  ChangePasswordScreen,
+  ReviewAddScreen
 } from "../screens";
 import { TestDrawer, DrawerScreen } from "../components";
 
@@ -43,6 +45,8 @@ const DrawerNavigators = () => {
       <Drawer.Screen name="ManageAddress" component={ManageAddress} />
       <Drawer.Screen name="AddAddress" component={AddAddressScreen} />
       <Drawer.Screen name="UpdateAddress" component={UpdateAddressScreen} />
+      <Drawer.Screen name="ChangePassword" component={ChangePasswordScreen} />
+      <Stack.Screen name="ReviewAdd" component={ReviewAddScreen}/>
     </Drawer.Navigator>
   );
 };

@@ -6,15 +6,18 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Colors, General } from "../contants";
 import { WelcomeCard, Separator } from "../components";
 import { Display } from "../utils";
+
 
 const pageStyle = (isActive) =>
   isActive ? styles.page : { backgroundColor: Colors.DEFAULT_GREY };
 
 const Pagination = ({ index }) => {
+
+
   return (
     <View style={styles.pageContainer}>
       {General.WELCOME_CONTENTS.map((_, i) => (

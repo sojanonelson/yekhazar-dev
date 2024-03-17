@@ -25,7 +25,7 @@ import { Display } from "../utils";
 const CartScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const [Isloading, setIsLoading] = useState();
-  const userId = useSelector((state) => state.user.user.user.id);
+  const userId = useSelector((state) => state.user.user.id);
   const token = useSelector((state) => state.user.user.token);
   const cartItems = useSelector((state) => state.cart.items);
   const paymentKey = useSelector((state) => state.general.paymentKey);

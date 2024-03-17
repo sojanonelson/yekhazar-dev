@@ -25,7 +25,7 @@ const getAllProduct = async () => {
       { params }
     );
 
-    console.log("PRODUCTS:", response?.data);
+    console.log("PRODUCTS:");
     console.log("Product Done✅");
     return response?.data?.products;
   } catch (error) {

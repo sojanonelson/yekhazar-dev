@@ -57,12 +57,11 @@ const HomeScreen = () => {
   };
 
   const categoryData = useSelector((state) => state.category.category);
-  const userData = useSelector((state) => state.user.user.user);
+ 
   const productsData = useSelector((state) => state.product.products);
-  const brandData = useSelector((state) => state.brand.brands);
+ 
   const cartCount = useSelector((state) => state.cart.count);
-  const token = useSelector((state) => state.user.user.token);
-  const [quantity, setQuantity] = useState(1);
+
   //CONSOLES
   // console.log("🪐TOKEN: ", token);
   // console.log("🪐User Data: ", userData);
@@ -102,7 +101,7 @@ const HomeScreen = () => {
         categoryName
       );
       setProducts(products.products);
-      console.log("Products for", categoryName, ":", products);
+      console.log("Products for", categoryName, );
     } catch (error) {
       console.error("Error fetching products {product service}:", error);
     }

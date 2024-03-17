@@ -5,7 +5,9 @@ import {
   View,
   TouchableHighlight,
   Alert,
+  TouchableOpacity,
 } from "react-native";
+import RazorpayCheckout from 'react-native-razorpay';
 
 import { useSelector } from "react-redux";
 
@@ -18,45 +20,92 @@ const PaymentScreen = () => {
   console.log("📦Order ID:", orderId);
   console.log("📦Payment Amount:", paymentAmount);
 
-  // const handlePayment = async () => {
-  //   if (!paymentKey) {
-  //     console.log("Payment key is missing or invalid");
-  //     return;
-  //   }
+  const handlePayment = async () => {
+    console.log("Payment started");
+    if (!paymentKey) {
+      console.log("Payment key is missing or invalid");
+      return;
+    }
 
-  //   const options = {
-  //     description: "Credits towards consultation",
-  //     image: "https://i.imgur.com/3g7nmJC.jpg",
-  //     currency: "INR",
-  //     key: paymentKey,
-  //     amount: paymentAmount * 100, // converting amount to paise
-  //     name: "YEKHAZAR",
-  //     order_id: orderId,
-  //     prefill: {
-  //       email: "business.deeze@gmail.com",
-  //       contact: "9191919191",
-  //       name: "Admin Batman Here",
-  //     },
-  //     theme: { color: "red" },
-  //   };
+    const options = {
+      description: "Credits towards consultation",
+      image: "https://i.imgur.com/3g7nmJC.jpg",
+      currency: "INR",
+      key: paymentKey,
+      amount: paymentAmount * 100,
+      name: "YEKHAZAR",
+      order_id: orderId,
+      prefill: {
+        email: "business.deeze@gmail.com",
+        contact: "9191919191",
+        name: "Admin Batman Here",
+      },
+      theme: { color: "red" },
+    };
 
-  //  await RazorpayCheckout.open(options)
-  //     .then((data) => {
-  //       console.log("Payment Successful:", data);
-  //       Alert.alert("Payment Successful", `ID: ${data.razorpay_payment_id}`);
-  //     })
-  //     .catch((error) => {
-  //       console.log("Error in Razorpay payment:", error);
-  //       Alert.alert("Payment Error", `${error.code} | ${error}`);
-  //     });
-  // };
+    await RazorpayCheckout.open(options)
+      .then((data) => {
+        console.log("Payment Successful:", data);
+        console.log("Payment Successfulllllllll");
+        console.log("Payment Successfulllllllll");
+        console.log("Payment Successfulllllllll");
+        Alert.alert("Payment Successful", `ID: ${data.razorpay_payment_id}`);
+      })
+      .catch((error) => {
+        console.log("Error in Razorpay payment:", error);
+        Alert.alert("Payment Error", `${error.code} | ${error}`);
+      });
+  };
+
+  const hello = async () => {
+    console.log("Payment started");
+    if (!paymentKey) {
+      console.log("Payment key is missing or invalid");
+      return;
+    }
+
+    try {
+      const options = {
+        description: "Credits towards consultation",
+        image: "https://i.imgur.com/3g7nmJC.jpg",
+        currency: "INR",
+        key: paymentKey,
+        amount: paymentAmount * 100,
+        name: "YEKHAZAR",
+        order_id: orderId,
+        prefill: {
+          email: "business.deeze@gmail.com",
+          contact: "9191919191",
+          name: "Admin Batman Here",
+        },
+        theme: { color: "red" },
+      };
+
+      await RazorpayCheckout.open(options)
+        .then((data) => {
+          console.log("Payment Successful:", data);
+          console.log("Payment Successfulllllllll");
+          console.log("Payment Successfulllllllll");
+          console.log("Payment Successfulllllllll");
+          Alert.alert("Payment Successful", `ID: ${data.razorpay_payment_id}`);
+        })
+        .catch((error) => {
+          console.log("Error in Razorpay payment:", error);
+          Alert.alert("Payment Error", `${error.code} | ${error}`);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <TouchableHighlight>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Proceed to Payment</Text>
-        </View>
+        <TouchableOpacity onPress={() => hello()}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Proceed to Payment</Text>
+          </View>
+        </TouchableOpacity>
       </TouchableHighlight>
     </View>
   );
@@ -73,6 +122,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 5,
+    cursor: "pointer",
   },
   buttonText: {
     color: "white",

@@ -19,9 +19,10 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setAddress } from "../redux/slices/userSlice";
 import { setSelectedAddress } from "../redux/slices/GeneralSlice";
+import { localUserData } from "../services/StorageService";
 
 const ManageAddress = () => {
-  const token = useSelector((state) => state.user.user.token);
+  
   const dispatch = useDispatch();
   const [userAddresses, setUserAddresses] = useState([]);
   const navigation = useNavigation();
@@ -30,6 +31,8 @@ const ManageAddress = () => {
     React.useCallback(() => {
       const fetchData = async () => {
         try {
+          const {token} = await localUserData()
+          console.log(token)
           const response = await UserService.getAddress(token);
           setUserAddresses(response.addresses);
           dispatch(setAddress(response.addresses));
@@ -39,7 +42,7 @@ const ManageAddress = () => {
         }
       };
       fetchData();
-    }, [token])
+    }, [])
   );
 
   const goForUpdate = (address) => {

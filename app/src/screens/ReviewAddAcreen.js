@@ -13,6 +13,7 @@ import { Separator, SettingsHeader } from "../components";
 import { Colors } from "../contants";
 import { UserService } from "../services";
 import { useSelector } from "react-redux";
+import { localUserData } from "../services/StorageService";
 
 const ReviewAddScreen = ({ navigation }) => {
   const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ const ReviewAddScreen = ({ navigation }) => {
   const [rating, setRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isRecommended, setIsRecommended] = useState(false);
-  const token = useSelector((state) => state.user.token);
+  const {token} = localUserData()
   const productID = useSelector((state) => state.general.selectedProduct._id);
 
   const handleSubmitReview = async () => {
