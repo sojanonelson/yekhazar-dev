@@ -15,11 +15,15 @@ import AddAddressScreen from "./AddAddressScreen";
 import UpdateAddressScreen from "./UpdateAddressScreen";
 import ProfileScreen from "./ProfileScreen";
 import CartScreen from "./CartScreen";
+import ChangePasswordScreen from "./ChangePasswordScreen";
+import ReviewAddScreen from "./ReviewAddAcreen";
 
 export {
   SplashScreen,
   WelcomeScreen,
   UpdateAddressScreen,
+  ChangePasswordScreen,
+  ReviewAddScreen,
   
   ProfileScreen,
   AddAddressScreen,

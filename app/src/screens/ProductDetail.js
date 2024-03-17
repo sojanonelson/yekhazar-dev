@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -21,8 +21,29 @@ import Ionicon from "@expo/vector-icons/Ionicons";
 
 import { Display } from "../utils";
 import { addItem } from "../redux/slices/CartSlice";
+import { localUserData } from "../services/StorageService";
 
 const ProductDetail = () => {
+
+  const [userData,setUserData]= useState(null)
+
+useEffect(()=>{
+
+  const fetchData = async () =>{
+      try{
+
+        const {userData} = await localUserData()
+        console.log("UUU", userData )
+        setUserData(userData)
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    fetchData()
+
+   },[])   
 
 
   const selectedProduct = useSelector((state) => state.general.selectedProduct);
@@ -36,6 +57,7 @@ const ProductDetail = () => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const [quantity, setQuantity] = useState(1);
+ 
   const [buttonText, setButtonText] = useState("Add to Cart");
   const cartCount = useSelector((state) => state.cart.count);
   const cartProduct = useSelector((state) => state.cart.items);
@@ -72,9 +94,10 @@ const ProductDetail = () => {
   };
 
   const productsData = useSelector((state) => state.product.products[0]);
-  const userData = useSelector((state) => state.user.user.user);
+  // const userData = useSelector((state) => state.user.user.user);
+ 
   const categoryData = useSelector((state) => state.category.category);
-  const brandData = useSelector((state) => state.brand.brands);
+
 
   const incrementQuantity = () => {
     if (quantity < selectedProduct.quantity) {
@@ -88,7 +111,7 @@ const ProductDetail = () => {
     }
   };
 
-  console.log("📦 UserData:", userData.firstName);
+  console.log("📦 UserData:", userData);
   console.log("📦 AllCategory:", categoryData);
   console.log("📦 ProductDeatils:", productsData.imageUrl);
 

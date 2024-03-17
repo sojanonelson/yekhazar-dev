@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import ProductItem from './ProductItem';
 
 const ProductList = ({ products}) => {
-  console.log("productList: ", products)
+  // console.log("productList: ", products)
 
   return (
     <View style={styles.container}>

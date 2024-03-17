@@ -25,7 +25,7 @@ const getSingleCategory = async () => {
       ApiConstants.BACKEND_API.CATEGORY_LIST
     );
     const categories = response?.data?.categories?.[1].slug;
-    console.log('🔺Single Category', categories);
+    console.log('🔺Single Category');
 
     return categories;
   } catch (error) {

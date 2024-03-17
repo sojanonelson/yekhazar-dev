@@ -5,7 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React,{useEffect, useState} from "react";
 import Separator from "./Separator";
 import { Colors } from "../contants";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,9 +15,36 @@ import {
   setShowcaseProductname,
 } from "../redux/slices/GeneralSlice";
 import { ProductService } from "../services";
+
+import { localUserData } from "../services/StorageService";
+
 const DrawerScreen = ({ navigation }) => {
+  const [userData, setUserData] = useState("")
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+       
+        
+        const { userData } = await localUserData();
+        setUserData(userData);
+        
+        console.log("userData:", userData );
+      } catch (error) {
+        console.error("Error retrieving user credentials:", error);
+      }
+    };
+
+    fetchData();
+
+
+
+  }, []);
+
+ 
+
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.user.user);
+  // const userData = useSelector((state) => state.user.user.user);
   const categoryData = useSelector((state) => state.category.category);
   const showcaseProductName = useSelector(
     (state) => state.general.showcaseProductName
@@ -31,8 +58,7 @@ const DrawerScreen = ({ navigation }) => {
       );
       dispatch(setShowcaseProduct(product.products));
       navigation.navigate("SingleCategory")
-      console.log("🪐Showcase of: ", showcaseProductName);
-      console.log("🪐Showcase Product: ", product);
+      
     } catch (error) {
       console.log("🪐Drawer showCase Error: ", error);
     }
